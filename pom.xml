@@ -29,6 +29,12 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				<configuration>
+		                    <anypointPlatformUsername>${env.ANYPOINT_USERNAME}</anypointPlatformUsername>
+		                    <anypointPlatformPassword>${env.ANYPOINT_PASSWORD}</anypointPlatformPassword>
+		                    <environment>Sandbox</environment>
+		                    <target>CloudHub2.0</target>
+		                </configuration>
 			</plugin>
 		</plugins>
 	</build>
