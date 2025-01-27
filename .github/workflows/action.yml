@@ -1,0 +1,35 @@
+name: Deploy to CloudHub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+          
+      - name: Install Maven
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+          
+      - name: Build Mule Application
+        run: mvn clean package
+
+      - name: Deploy to CloudHub
+        env:
+          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_PLATFORM_USERNAME }}
+          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PLATFORM_PASSWORD }}
+        run: |
+          mvn mule-deploy:deploy -Danypoint.platform.username=${{ secrets.ANYPOINT_USERNAME }} -Danypoint.platform.password=${{ secrets.ANYPOINT_PASSWORD }} -Danypoint.platform.environment=Sandbox -Danypoint.platform.target=CloudHub 2.0
