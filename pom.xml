@@ -29,6 +29,13 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 		                    <anypointPlatformUsername>${env.ANYPOINT_USERNAME}</anypointPlatformUsername>
 		                    <anypointPlatformPassword>${env.ANYPOINT_PASSWORD}</anypointPlatformPassword>
